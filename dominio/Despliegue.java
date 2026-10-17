@@ -7,10 +7,10 @@ import tads.Lista;
 
 public class Despliegue implements Comparable<Despliegue>, Identificador {
 //despliegue(String id(incremental), String codigo, String descripcion, boolean cuantizado, Modalidad modalidad)
-    private String codigo;
+    private String codigo;  //solo letras, mayúsculas o minúsculas, y números
     private String descripcion;
     private boolean cuantizado;
-    private Modalidad modalidad;
+    private String modalidadTexto;
 
 
     public Despliegue() {
@@ -24,41 +24,40 @@ public class Despliegue implements Comparable<Despliegue>, Identificador {
           this.modalidadTexto = modalidadTexto;
     }
 
-    public String getNombre() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setNombre(String codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
-    public int getCapacidad() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setCapacidad(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public ILista<LocalDate> getFechasOcupadas() {
-        return fechasOcupadas;
+       public boolean getCuantizado() {
+        return cuantizado;
     }
 
-    public boolean estaOcupadaEnFecha(LocalDate fecha) {
-        for (LocalDate f : fechasOcupadas) {
-            if (f.equals(fecha)) {
-                return true;
-            }
-        }
-        return false;
+    public void setCuantizado(boolean cuantizado) {
+        this.cuantizado = cuantizado;
     }
 
-    public void ocuparFecha(LocalDate fecha) {
-        if (!estaOcupadaEnFecha(fecha)) {
-            fechasOcupadas.agregarFinal(fecha);
-        }
+           public String getModalidadDespliegue() {
+        return modalidadTexto;
     }
 
+    public void setModalidadDespliegue(String modalidadTexto) {
+        this.modalidadTexto = modalidadTexto;
+    }
+
+
+   
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Despliegue)) {
@@ -66,17 +65,17 @@ public class Despliegue implements Comparable<Despliegue>, Identificador {
         }
 
         Despliegue s = (Despliegue) obj;
-        return this.codigo.equals(s.getNombre());
+        return this.codigo.equals(s.getCodigo());
     }
 
     @Override
     public String toString() {
-        return "Codigo: " + codigo + " - " + "Descripcion: " + descripcion;
+        return "Codigo: " + codigo + " - " + "Descripcion: " + descripcion + "Cuantizado: " + cuantizado + "Modalidad: " + modalidadTexto;
     }
 
     @Override
-    public int compareTo(Despliegue unaSala) {
-        return this.codigo.compareTo(unaSala.codigo);
+    public int compareTo(Despliegue unDespliegue) {
+        return this.codigo.compareTo(unDespliegue.codigo);
     }
 
     @Override
